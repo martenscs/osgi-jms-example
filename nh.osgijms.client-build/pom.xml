@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nh.osgijms.client</groupId>
 	<artifactId>nh.osgijms.client-build</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>tycho-build-archetype</name>
 	<organization>
 		<name>Eclipse org</name>
 	</organization>
 	<properties>
-		<tycho-version>0.16.0</tycho-version>
+		<tycho-version>0.18.1</tycho-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.java.version>1.6</project.build.java.version>
 	</properties>
 	<repositories>
+		<repository>
+			<id>sonatype.net</id>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/release</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.external</id>
+			<name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/external</url>
+		</repository>
+
 		<repository>
 			<id>eclipse-product</id>
 			<url>http://download.eclipse.org/eclipse/updates/3.8</url>
@@ -31,6 +47,39 @@
 			<layout>p2</layout>
 		</repository>
 	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-annotation_1.0_spec</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-j2ee-management_1.1_spec</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jacc_1.1_spec</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jms_1.1_spec</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jta_1.0.1B_spec</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>com.springsource.org.apache.activemq</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -59,7 +108,7 @@
 				<version>${tycho-version}</version>
 				<configuration>
 					<resolver>p2</resolver>
-					<ignoreTychoRepositories>true</ignoreTychoRepositories>
+					<pomDependencies>consider</pomDependencies>
 					<environments>
 						<environment>
 							<os>win32</os>
@@ -105,8 +154,8 @@
 					<artifactId>maven-antrun-plugin</artifactId>
 					<version>1.6</version>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven 
-					build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -134,4 +183,12 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<modules>
+		<module>../nh.osgijms.domain</module>
+		<module>../nh.osgijms.framework</module>
+		<module>../nh.osgijms.infrastructure.jms</module>
+		<module>../nh.osgijms.infrastructure.osgi</module>
+		<module>../nh.osgijms.message_v1</module>
+		<module>../nh.osgijms.target-platform</module>
+	</modules>
 </project>
