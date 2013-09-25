@@ -90,7 +90,7 @@ public class Activator implements BundleActivator {
 
     log("Starting JMS Infrastructure");
     // Create the connection.
-    ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+    ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("karaf","karaf","tcp://localhost:61616");
     _connection = connectionFactory.createConnection();
 
     // Create the session
